@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Welcome to the Questionnaire Home Page.</h2>
+        <form>
+            <div class="form-group" ng-repeat="question in questions" ng-init="outerIndex = $index">
+                <input type="text" ng-model=tex['id'+(outerIndex+1)] name="{{outerIndex}}" placeholder="Type Question Here ...."> 
+                <select ng-model=answSent['id'+(outerIndex+1)] ng-options="item.answer as item.answer for item in answer_options">
+                    <option value="">Select Answer Type</option>
+                  </select>
+                  <div ng-repeat="choice in question.choices" ng-if="answSent['id'+(outerIndex+1)] == 'Multiple Choice'" ng-init="innerIndex = $index">
+                    <!-- <input type="text" ng-model="ans.choice.name" value="please enter your choice"/> -->
+                    <input type="text" ng-model = choi[outerIndex+1]['id'+(innerIndex+1)] name="{{innerIndex}}"/>
+                    <button ng-click="addNewChoice(outerIndex)">Add Choice</button>
+                    <button ng-click="removeNewChoice(outerIndex)">Remove Choice</button>
+                  </div>
+                  <!-- {{answSent}}
+                  <p>Choices {{choi}}</p> -->
+                <button ng-click="removeNewQuestion()">Remove Question</button>
+                <button ng-show="showAddQuestion(question)" ng-click="addNewQuestion()">Add Question</button>
+            </div>
+            <button type="submit" ng-click="submitQuestions(tex,answSent,choi)">Submit Questions</button>
+        </form>
+        </div>
+    </div>
+</div>
